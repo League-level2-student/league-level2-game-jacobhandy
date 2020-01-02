@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,12 +15,13 @@ final int MENU_STATE = 0;
 final int GAME_STATE = 1;
 final int END_STATE = 2;
 int currentState = MENU_STATE;
-
+Font titleFont;
 public void startGame() {
 		timer.start();
 		}
 	public GamePanel() {
 		timer = new Timer(1000 / 60, this);
+		titleFont = new Font("Arial", Font.BOLD, 100);
 	
 	}
 	@Override
@@ -105,16 +107,26 @@ public void startGame() {
 	void drawMenuState(Graphics g) {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, Game.frameWidth, Game.frameHeight);    
-
-
+		g.setFont(titleFont);
+		g.setColor(Color.GREEN);
+		g.drawString("The End of the World", 230, 175);
+		g.setColor(Color.RED);
+		g.drawString("DEFINITIVE EDITION", 240, 255);
+		g.setColor(Color.YELLOW);
+		g.drawString("Press Enter to play game", 175, 830);
+		
 	}
 	void drawGameState(Graphics g) {
 		g.setColor(Color.GRAY);
-		g.fillRect(0, 0, Game.frameWidth, Game.frameHeight);  
+		g.fillRect(0, 0, Game.frameWidth, Game.frameHeight); 
+		g.setFont(titleFont);
 	}
 	void drawEndState(Graphics g) {
-		g.setColor(Color.RED);
+		g.setColor(Color.black);
 		g.fillRect(0, 0, Game.frameWidth, Game.frameHeight);  
+		g.setFont(titleFont);
+		g.setColor(Color.RED);
+		g.drawString("YOU DIED", 450, 400);
 	}
 }
 
