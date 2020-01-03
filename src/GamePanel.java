@@ -16,6 +16,7 @@ final int GAME_STATE = 1;
 final int END_STATE = 2;
 int currentState = MENU_STATE;
 Font titleFont;
+Player alien = new Player (250,700,50,50);
 public void startGame() {
 		timer.start();
 		}
@@ -47,7 +48,19 @@ public void startGame() {
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+		int keyCode = e.getKeyCode();
+		if(keyCode == KeyEvent.VK_W) {
+			alien.moveUp();
+		}
+		if(keyCode == KeyEvent.VK_A) {
+			alien.moveLeft();
+		}
+		if(keyCode == KeyEvent.VK_S) {
+			alien.moveDown();
+		}
+		if(keyCode == KeyEvent.VK_D) {
+			alien.moveRight();
+		}
 	}
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -68,6 +81,7 @@ public void startGame() {
 			}
 			 
 		}
+	
 	}
 	@Override
 	public void keyReleased(KeyEvent e) {
@@ -99,7 +113,7 @@ public void startGame() {
 		
 	}
 	void updateGameState() {
-		
+		alien.update();
 	}
 	void updateEndState() {
 		
@@ -117,9 +131,12 @@ public void startGame() {
 		
 	}
 	void drawGameState(Graphics g) {
-		g.setColor(Color.GRAY);
+		//set up screen
+		g.setColor(Color.black);
 		g.fillRect(0, 0, Game.frameWidth, Game.frameHeight); 
 		g.setFont(titleFont);
+		//create alien
+		alien.draw(g);
 	}
 	void drawEndState(Graphics g) {
 		g.setColor(Color.black);
