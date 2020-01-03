@@ -48,19 +48,8 @@ public void startGame() {
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		int keyCode = e.getKeyCode();
-		if(keyCode == KeyEvent.VK_W) {
-			alien.moveUp();
-		}
-		if(keyCode == KeyEvent.VK_A) {
-			alien.moveLeft();
-		}
-		if(keyCode == KeyEvent.VK_S) {
-			alien.moveDown();
-		}
-		if(keyCode == KeyEvent.VK_D) {
-			alien.moveRight();
-		}
+	
+	
 	}
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -81,7 +70,18 @@ public void startGame() {
 			}
 			 
 		}
-	
+		if(keyCode == KeyEvent.VK_W) {
+			alien.moveUp();
+		}
+		if(keyCode == KeyEvent.VK_A) {
+			alien.moveLeft();
+		}
+		if(keyCode == KeyEvent.VK_S) {
+			alien.moveDown();
+		}
+		if(keyCode == KeyEvent.VK_D) {
+			alien.moveRight();
+		}
 	}
 	@Override
 	public void keyReleased(KeyEvent e) {
