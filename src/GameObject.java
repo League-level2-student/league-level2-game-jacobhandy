@@ -1,15 +1,20 @@
 import java.awt.Graphics;
 
+
+
 public class GameObject {
-	 int x;
-     int y;
+	 static int x;
+     static int y;
      int width;
      int height;
+     boolean isAlive;
+     
      public GameObject(int X, int Y, int Width, int Height) {
     	   x = X;
     	 y = Y;
     	 width = Width;
     	 height = Height;
+    	 isAlive = true;
      }
      void update() {
     	 y++;

@@ -16,7 +16,8 @@ final int GAME_STATE = 1;
 final int END_STATE = 2;
 int currentState = MENU_STATE;
 Font titleFont;
-Player alien = new Player (250,700,50,50);
+Player alien = new Player (250,70,50,50);
+ObjectManager manager = new ObjectManager(alien);
 public void startGame() {
 		timer.start();
 		}

@@ -6,7 +6,7 @@ public class Player extends GameObject{
 	public int downSpeed = 30;
 	public Player(int X, int Y, int Width, int Height) {
 	super(X, Y, Width, Height);
-	speed = 25;
+	speed = 15;
 	
 }
 public void update() {
@@ -17,7 +17,7 @@ public void draw(Graphics g) {
     g.fillRect(x, y, width, height);
 }
 public void moveLeft() {
-	x = x -speed;
+	x = x - speed;
 }
 public void moveRight() {
 	x = x + speed;
