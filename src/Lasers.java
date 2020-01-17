@@ -8,13 +8,14 @@ public int speed;
 		speed = 30;
 	}
 	public void update() {
+		super.update();
 		y+=speed;
 		if(y > 1800) {
 			isAlive = false;
 		}
 	}
 	public void draw(Graphics g) {
-		g.drawRect(Player.x, Player.y, 5, 10);
+		g.drawRect(x, y, 5, 10);
 	}
 }
 

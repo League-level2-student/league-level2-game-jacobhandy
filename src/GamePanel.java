@@ -18,6 +18,7 @@ int currentState = MENU_STATE;
 Font titleFont;
 Player alien = new Player (250,70,50,50);
 ObjectManager manager = new ObjectManager(alien);
+
 public void startGame() {
 		timer.start();
 		}
@@ -87,7 +88,10 @@ public void startGame() {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+		int keyCode = e.getKeyCode();
+		if(keyCode == KeyEvent.VK_SPACE) {
+			manager.addProjectile(new Lasers(alien.x + 20, alien.y, 10, 10)); 
+		}
 	}
 	@Override
 
@@ -114,7 +118,8 @@ public void startGame() {
 		
 	}
 	void updateGameState() {
-		alien.update();
+		
+		manager.update();
 	}
 	void updateEndState() {
 		
@@ -138,6 +143,7 @@ public void startGame() {
 		g.setFont(titleFont);
 		//create alien
 		alien.draw(g);
+		manager.draw(g);
 	}
 	void drawEndState(Graphics g) {
 		g.setColor(Color.black);

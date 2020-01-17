@@ -3,8 +3,8 @@ import java.awt.Graphics;
 
 
 public class GameObject {
-	 static int x;
-     static int y;
+	 int x;
+     int y;
      int width;
      int height;
      boolean isAlive;
