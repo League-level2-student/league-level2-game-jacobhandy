@@ -17,6 +17,7 @@ final int END_STATE = 2;
 int currentState = MENU_STATE;
 Font titleFont;
 Player alien = new Player (250,70,50,50);
+Terrain t = new Terrain();
 ObjectManager manager = new ObjectManager(alien);
 
 public void startGame() {
@@ -142,8 +143,12 @@ public void startGame() {
 		g.fillRect(0, 0, Game.frameWidth, Game.frameHeight); 
 		g.setFont(titleFont);
 		//create alien
+		manager.manageHills();
+		
 		alien.draw(g);
 		manager.draw(g);
+		t.draw(g);
+		
 	}
 	void drawEndState(Graphics g) {
 		g.setColor(Color.black);

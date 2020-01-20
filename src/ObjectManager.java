@@ -5,6 +5,8 @@ public class ObjectManager {
 Player alien;
 
 ArrayList<Lasers> lasers = new ArrayList<Lasers>();
+ArrayList<Terrain> hills = new ArrayList<Terrain>();
+
 public ObjectManager(Player p) {
 	alien = new Player(250,70,50,50);
 	
@@ -14,6 +16,9 @@ public void update() {
 	for(Lasers p: lasers) {
 		p.update();
 	}
+	for(Terrain t : hills) {
+		t.update();
+	}
 }
 public void draw(Graphics g) {
 	alien.draw(g);
@@ -22,9 +27,24 @@ public void draw(Graphics g) {
 
 	}
 
+	for (Terrain t : hills) {
+		t.draw(g);
+	}
 }
 
 public void addProjectile(Lasers l) {
 	lasers.add(l);
+}
+public void addHill(Terrain p) {
+	hills.add(p);
+}
+int a = 0;
+Terrain t = new Terrain();
+public void manageHills() {
+	a++;
+	
+	if(a % 300 == 0) {
+		addHill(t);
+	}
 }
 }
