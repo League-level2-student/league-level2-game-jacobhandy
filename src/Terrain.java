@@ -8,10 +8,10 @@ public class Terrain {
 	int hillX;
 	int hillY;
 	public Terrain() {
-	speed = 5;
+	speed = 10;
 	baseX = 0;
 	baseY = 800;
-	hillX = 1200;
+	hillX = 2200;
 	hillY = 750;
 	
 	}
@@ -19,12 +19,14 @@ public class Terrain {
 		g.setColor(Color.GREEN);
 		//g.fillOval(x, y, width, height);
 		//draw primary ground
-		g.fillRect(baseX, baseY, 2000, 100);
+		g.fillRect(baseX, baseY, 2000, 200);
+		// hills 
 		g.fillOval(hillX, 750, 300, 150);
 	}
 	public void update() {
 		hillX -= speed;
-		System.out.println(hillX);
+		
+		
 		
 	}
 }

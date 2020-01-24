@@ -137,7 +137,7 @@ public void startGame() {
 		g.drawString("Press Enter to play game", 175, 830);
 		
 	}
-	void drawGameState(Graphics g) {
+	void drawGameState(Graphics g){
 		//set up screen
 		g.setColor(Color.black);
 		g.fillRect(0, 0, Game.frameWidth, Game.frameHeight); 
