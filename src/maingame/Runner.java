@@ -1,3 +1,4 @@
+package maingame;
 import javax.swing.JFrame;
 
 public class Runner {

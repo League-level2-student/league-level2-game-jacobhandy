@@ -1,10 +1,11 @@
+package maingame.gameObjects;
 import java.awt.Graphics;
 
 
 import java.util.ArrayList;
 
 public class ObjectManager extends Terrain {
-	Player alien;
+	public static Player alien;
 	public int delay = 300;
 	ArrayList<Lasers> lasers = new ArrayList<Lasers>();
 	ArrayList<Terrain> hills = new ArrayList<Terrain>();

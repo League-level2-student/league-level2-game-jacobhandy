@@ -1,7 +1,10 @@
+package maingame;
 import java.awt.Dimension;
 import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
+
+import maingame.gameObjects.GamePanel;
 
 public class Game {
 	public static int frameWidth = 2000;

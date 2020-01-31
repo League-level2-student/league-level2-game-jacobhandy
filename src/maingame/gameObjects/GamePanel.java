@@ -1,3 +1,4 @@
+package maingame.gameObjects;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -8,6 +9,8 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
+
+import maingame.Game;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener{
 Timer timer;

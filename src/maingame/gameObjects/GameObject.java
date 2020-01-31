@@ -1,12 +1,13 @@
+package maingame.gameObjects;
 import java.awt.Graphics;
 
 
 
 public class GameObject {
-	 int x;
-     int y;
-     int width;
-     int height;
+	 public int x;
+     public int y;
+     public int width;
+     public int height;
      boolean isAlive;
      
      public GameObject(int X, int Y, int Width, int Height) {
@@ -16,13 +17,13 @@ public class GameObject {
     	 height = Height;
     	 isAlive = true;
      }
-     void update() {
+     public void update() {
     	 y++;
     	 x++;
     
     	 
      }
-     void draw(Graphics g) {
+     public void draw(Graphics g) {
     	 g.fillRect(x, y, width, height);
 
 

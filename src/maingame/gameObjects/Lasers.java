@@ -1,3 +1,4 @@
+package maingame.gameObjects;
 import java.awt.Graphics;
 
 public class Lasers extends GameObject {
