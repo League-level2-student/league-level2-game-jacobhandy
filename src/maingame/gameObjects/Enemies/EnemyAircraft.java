@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import maingame.gameObjects.Bullet;
 import maingame.gameObjects.GameObject;
 import maingame.gameObjects.ObjectManager;
-import maingame.gameObjects.Player;
 
 public class EnemyAircraft extends GameObject{
 //This enemy will stay on the screen and will move back and forth until it is destroyed. It will fire a bullet when it shares the same X value as the player
