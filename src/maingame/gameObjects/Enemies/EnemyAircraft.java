@@ -19,7 +19,7 @@ public class EnemyAircraft extends GameObject{
 	
 	public void draw(Graphics g) {
 		g.setColor(Color.BLUE);
-		g.fillRect(x, y, width, height);
+		g.fillRect(x, y, 50, 50);
 		for(Bullet b: ammunition) {
 			 b.draw(g);
 		}

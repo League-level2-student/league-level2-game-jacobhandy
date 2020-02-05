@@ -3,20 +3,28 @@ import java.awt.Graphics;
 
 
 import java.util.ArrayList;
+import java.util.Random;
+
+import maingame.gameObjects.Enemies.EnemyAircraft;
 
 public class ObjectManager extends Terrain {
 	public static Player alien;
+	public static EnemyAircraft sputnik;
 	public int delay = 300;
+	public long enemyTimer = 0;
+	public int enemySpawnTime = 1000;
 	ArrayList<Lasers> lasers = new ArrayList<Lasers>();
 	ArrayList<Terrain> hills = new ArrayList<Terrain>();
-	
+	ArrayList<EnemyAircraft> army = new ArrayList<EnemyAircraft>();
 
 	public ObjectManager(Player p) {
 		alien = new Player(250, 70, 50, 50);
 		addHill(t);
+		
 	}
 
 	public void update() {
+		
 		alien.update();
 		for (Lasers p : lasers) {
 			p.update();
@@ -24,10 +32,14 @@ public class ObjectManager extends Terrain {
 		for (Terrain t : hills) {
 			t.update();
 		}
+		for(EnemyAircraft ea : army) {
+			ea.update();
+		}
 	}
 
 	public void draw(Graphics g) {
 		alien.draw(g);
+		
 		for (Lasers p : lasers) {
 			p.draw(g);
 
@@ -35,6 +47,9 @@ public class ObjectManager extends Terrain {
 
 		for (Terrain t : hills) {
 			t.draw(g);
+		}
+		for(EnemyAircraft ea : army) {
+			ea.draw(g);
 		}
 	}
 
@@ -49,9 +64,27 @@ public class ObjectManager extends Terrain {
 	int a = 0;
 	Terrain t = new Terrain();
 
+	//manage enemy aircraft in game panel with the timer class
+	
+	EnemyAircraft ea = new EnemyAircraft(new Random().nextInt(2000), 1500, 50, 50); //Add random values for position later
+	
+	public void manageEnemyAircraft() {
+		//System.out.println(army.size());
+		 if(System.currentTimeMillis() - enemyTimer >= enemySpawnTime){
+             addEnemyAircraft(ea);
+
+             enemyTimer = System.currentTimeMillis();
+     }
+	}
+	
+	private void addEnemyAircraft(EnemyAircraft ea) {
+		// TODO Auto-generated method stub
+		army.add(0, new EnemyAircraft(new Random().nextInt(2000), 1500, 50, 50));;
+	}
+
 	public void manageHills() {
 
-		System.out.println(speed);
+		
 	
 		if (t.hillX < -300) {
 			hills.remove(t);
