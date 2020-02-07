@@ -16,7 +16,7 @@ public class ObjectManager extends Terrain {
 	ArrayList<Lasers> lasers = new ArrayList<Lasers>();
 	ArrayList<Terrain> hills = new ArrayList<Terrain>();
 	ArrayList<EnemyAircraft> army = new ArrayList<EnemyAircraft>();
-
+	ArrayList<Bullet> ammo = new ArrayList<Bullet>();
 	public ObjectManager(Player p) {
 		alien = new Player(250, 70, 50, 50);
 		addHill(t);
@@ -34,6 +34,8 @@ public class ObjectManager extends Terrain {
 		}
 		for(EnemyAircraft ea : army) {
 			ea.update();
+			
+			
 		}
 	}
 
@@ -71,7 +73,7 @@ public class ObjectManager extends Terrain {
 	public void manageEnemyAircraft() {
 		//System.out.println(army.size());
 		 if(System.currentTimeMillis() - enemyTimer >= enemySpawnTime){
-             addEnemyAircraft(ea);
+			 addEnemyAircraft(new EnemyAircraft(new Random().nextInt(2000), new Random().nextInt(650 - 500) + 500, 50, 50));
 
              enemyTimer = System.currentTimeMillis();
      }
@@ -79,9 +81,11 @@ public class ObjectManager extends Terrain {
 	
 	private void addEnemyAircraft(EnemyAircraft ea) {
 		// TODO Auto-generated method stub
-		army.add(0, new EnemyAircraft(new Random().nextInt(2000), 1500, 50, 50));;
+		if(army.size() <= 0) {
+		army.add(0, ea);
 	}
-
+	}
+	
 	public void manageHills() {
 
 		
@@ -92,7 +96,7 @@ public class ObjectManager extends Terrain {
 			a = 0;
 			addHill(t);
 		}
-
+		
 		
 	
 		

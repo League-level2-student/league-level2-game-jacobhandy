@@ -8,7 +8,7 @@ public class Bullet extends GameObject{
 	public Bullet(int X, int Y, int Width, int Height) {
 		super(X, Y, Width, Height);
 		// TODO Auto-generated constructor stub
-		speed = 30;
+		speed = 20;
 	}
 	public void update() {
 		super.update();
@@ -18,7 +18,7 @@ public class Bullet extends GameObject{
 		}
 	}
 	public void draw(Graphics g) {
-		g.setColor(Color.RED);
+		g.setColor(Color.WHITE);
 		g.drawRect(x, y, 5, 10);
 	}
 }

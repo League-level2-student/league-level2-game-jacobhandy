@@ -20,9 +20,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int END_STATE = 2;
 	int currentState = MENU_STATE;
 	Font titleFont;
-	Player alien = new Player(250, 70, 50, 50);
+	//Player alien = new Player(250, 70, 50, 50);
 	Terrain t = new Terrain();
-	ObjectManager manager = new ObjectManager(alien);
+	ObjectManager manager = new ObjectManager(ObjectManager.alien);
 
 	public void startGame() {
 		timer.start();
@@ -66,7 +66,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		int keyCode = e.getKeyCode();
 		if (keyCode == KeyEvent.VK_ENTER) {
 
-			System.out.println("dbtgfrgdtg");
+			
 
 			currentState++;
 			System.out.println(currentState);
@@ -79,16 +79,16 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 		}
 		if (keyCode == KeyEvent.VK_W) {
-			alien.moveUp();
+			ObjectManager.alien.moveUp();
 		}
 		if (keyCode == KeyEvent.VK_A) {
-			alien.moveLeft();
+			ObjectManager.alien.moveLeft();
 		}
 		if (keyCode == KeyEvent.VK_S) {
-			alien.moveDown();
+			ObjectManager.alien.moveDown();
 		}
 		if (keyCode == KeyEvent.VK_D) {
-			alien.moveRight();
+			ObjectManager.alien.moveRight();
 		}
 	}
 
@@ -97,7 +97,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		// TODO Auto-generated method stub
 		int keyCode = e.getKeyCode();
 		if (keyCode == KeyEvent.VK_SPACE) {
-			manager.addProjectile(new Lasers(alien.x + 20, alien.y, 10, 10));
+			manager.addProjectile(new Lasers(ObjectManager.alien.x + 20, ObjectManager.alien.y, 10, 10));
 		}
 	}
 
@@ -154,10 +154,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		// create alien
 		manager.manageHills();
 
-		alien.draw(g);
+		ObjectManager.alien.draw(g);
 		manager.draw(g);
 		t.draw(g);
 		manager.manageEnemyAircraft();
+		
 	}
 
 	void drawEndState(Graphics g) {
