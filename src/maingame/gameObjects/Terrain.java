@@ -2,7 +2,7 @@ package maingame.gameObjects;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Terrain {
+public class Terrain{
 	int speed;
 	int baseX;
 	int baseY;
@@ -25,6 +25,7 @@ public class Terrain {
 		g.fillOval(hillX, 750, 300, 150);
 	}
 	public void update() {
+		
 		hillX -= speed;
 		
 		

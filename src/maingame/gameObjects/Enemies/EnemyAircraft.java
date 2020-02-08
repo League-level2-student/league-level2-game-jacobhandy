@@ -28,7 +28,7 @@ public class EnemyAircraft extends GameObject{
 		}
 	}
 	public void update() {
-		
+		super.update();
 		
 		if(x < 10) { 
 			direction++;
@@ -47,7 +47,7 @@ public class EnemyAircraft extends GameObject{
 			
 		fire();
 			
-			System.out.println("bang");
+			
 		}
 			
 		

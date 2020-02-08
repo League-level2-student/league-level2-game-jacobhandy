@@ -121,12 +121,16 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void updateMenuState() {
-
+		ObjectManager.alien.isAlive = true;
 	}
 
 	void updateGameState() {
 
 		manager.update();
+		manager.checkCollision();
+		if(ObjectManager.alien.isAlive == false) {
+			currentState++;
+		}
 	}
 
 	void updateEndState() {
