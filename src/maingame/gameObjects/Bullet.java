@@ -14,7 +14,7 @@ public class Bullet extends GameObject{
 		super.update();
 		y-=speed;
 		if(y < -10) {
-			isAlive = false;
+			setAlive(false);
 		}
 	}
 	public void draw(Graphics g) {

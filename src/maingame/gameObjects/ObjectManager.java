@@ -128,10 +128,26 @@ public class ObjectManager extends Terrain {
 		}
 		
 	}
-	public void purgeObjects() {
-		army.removeAll(army);
-		lasers.removeAll(lasers);
-		ammo.removeAll(ammo);
-	}
-
+	
+		public void purgeObjects() {
+			
+			
+			for(int a = 0; a < army.size(); a++) {
+				if(army.get(a).isAlive() == false) {
+					army.remove(a);
+					for(int x = 0; x < lasers.size(); x ++) {
+						if(lasers.get(x).isAlive() == false) {
+							lasers.remove(x);
+						}
+					}
+				}
+			}
+			
+		}
+		public void removeAll() {
+			army.removeAll(army);
+			lasers.removeAll(lasers);
+			ammo.removeAll(ammo);
+		}
 }
+

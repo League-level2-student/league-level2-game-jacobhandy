@@ -43,7 +43,8 @@ public class EnemyAircraft extends GameObject{
 		if(direction % 2 == 1) {
 			x-=speed;
 		}
-		if(x > ObjectManager.alien.x-0.25 && x < ObjectManager.alien.x+50 && ObjectManager.alien.y < y) { //need to get player's x
+		double impossible = 0.25;
+		if(x > ObjectManager.alien.x-impossible && x < ObjectManager.alien.x+50&& ObjectManager.alien.y < y) { //need to get player's x
 			
 		fire();
 			

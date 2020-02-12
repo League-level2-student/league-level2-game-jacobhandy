@@ -9,7 +9,7 @@ public class GameObject {
      public int y;
      public int width;
      public int height;
-     boolean isAlive;
+     public static boolean isAlive;
      public Rectangle collisionBox;
      
      public GameObject(int X, int Y, int Width, int Height) {
@@ -17,7 +17,7 @@ public class GameObject {
     	 y = Y;
     	 width = Width;
     	 height = Height;
-    	 isAlive = true;
+    	 setAlive(true);
     	 collisionBox = new Rectangle(x,y,width,height);
      }
      public void update() {
@@ -31,4 +31,10 @@ public class GameObject {
 
 
      }
+	public boolean isAlive() {
+		return isAlive;
+	}
+	void setAlive(boolean isAlive) {
+		this.isAlive = isAlive;
+	}
 }

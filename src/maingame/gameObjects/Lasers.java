@@ -12,7 +12,7 @@ public int speed;
 		super.update();
 		y+=speed;
 		if(y > 1800) {
-			isAlive = false;
+			setAlive(false);
 		}
 	}
 	public void draw(Graphics g) {

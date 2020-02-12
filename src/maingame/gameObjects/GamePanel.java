@@ -21,6 +21,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	int currentState = MENU_STATE;
 	Font titleFont;
 	//Player alien = new Player(250, 70, 50, 50);
+	//game is currently in impossible mode
 	Terrain t = new Terrain();
 	ObjectManager manager = new ObjectManager(ObjectManager.alien);
 
@@ -121,20 +122,21 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void updateMenuState() {
-		ObjectManager.alien.isAlive = true;
+		ObjectManager.alien.setAlive(true);
 	}
 
 	void updateGameState() {
 
 		manager.update();
 		manager.checkCollision();
-		if(ObjectManager.alien.isAlive == false) {
+		manager.purgeObjects();
+		if(ObjectManager.alien.isAlive() == false) {
 			currentState++;
 		}
 	}
 
 	void updateEndState() {
-
+		manager.removeAll();
 	}
 
 	void drawMenuState(Graphics g) {
