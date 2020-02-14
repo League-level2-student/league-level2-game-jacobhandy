@@ -10,11 +10,13 @@ public class Player extends GameObject {
 	public Player(int X, int Y, int Width, int Height) {
 		super(X, Y, Width, Height);
 		speed = 15;
-
+		
 	}
 
 	public void update() {
 		super.update();
+		collisionBox.setLocation(x, y);
+		//System.out.println(isAlive);
 	}
 
 	public void draw(Graphics g) {

@@ -9,7 +9,7 @@ public class GameObject {
      public int y;
      public int width;
      public int height;
-     public static boolean isAlive;
+     public boolean isAlive;
      public Rectangle collisionBox;
      
      public GameObject(int X, int Y, int Width, int Height) {
@@ -23,7 +23,7 @@ public class GameObject {
      public void update() {
     	 //y++;
     	// x++;
-    
+    	 collisionBox.setLocation(x,y);
     	 
      }
      public void draw(Graphics g) {

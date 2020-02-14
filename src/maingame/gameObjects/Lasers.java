@@ -10,6 +10,7 @@ public int speed;
 	}
 	public void update() {
 		super.update();
+		collisionBox.setLocation(x,y);
 		y+=speed;
 		if(y > 1800) {
 			setAlive(false);

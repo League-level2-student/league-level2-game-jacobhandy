@@ -2,7 +2,6 @@ package maingame.gameObjects.Enemies;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
-import java.util.Random;
 
 import maingame.gameObjects.Bullet;
 import maingame.gameObjects.GameObject;
@@ -29,7 +28,7 @@ public class EnemyAircraft extends GameObject{
 	}
 	public void update() {
 		super.update();
-		
+		collisionBox.setLocation(x,y);
 		if(x < 10) { 
 			direction++;
 			

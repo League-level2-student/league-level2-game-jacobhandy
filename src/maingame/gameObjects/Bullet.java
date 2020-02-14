@@ -8,13 +8,14 @@ public class Bullet extends GameObject{
 	public Bullet(int X, int Y, int Width, int Height) {
 		super(X, Y, Width, Height);
 		// TODO Auto-generated constructor stub
-		speed = 20;
+		speed = 10;
 	}
 	public void update() {
 		super.update();
+		collisionBox.setLocation(x, y);
 		y-=speed;
 		if(y < -10) {
-			setAlive(false);
+			isAlive = false;
 		}
 	}
 	public void draw(Graphics g) {

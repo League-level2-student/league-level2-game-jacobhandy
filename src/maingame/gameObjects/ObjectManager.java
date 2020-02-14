@@ -16,7 +16,7 @@ public class ObjectManager extends Terrain {
 	ArrayList<Lasers> lasers = new ArrayList<Lasers>();
 	ArrayList<Terrain> hills = new ArrayList<Terrain>();
 	ArrayList<EnemyAircraft> army = new ArrayList<EnemyAircraft>();
-	ArrayList<Bullet> ammo = new ArrayList<Bullet>();
+	//ArrayList<Bullet> ammo = new ArrayList<Bullet>();
 	public ObjectManager(Player p) {
 		alien = new Player(250, 70, 50, 50);
 		addHill(t);
@@ -102,27 +102,28 @@ public class ObjectManager extends Terrain {
 		
 	
 	}
+	
 	public void checkCollision() {
-		
-		for(EnemyAircraft ea: army) {
-			//when the player hits an enemy aircraft
-			if(alien.collisionBox.intersects(ea.collisionBox)) {
-				alien.isAlive = false;
-				System.out.println("game over");
-			}
-			//when the player gets shot by anything
-			for(Bullet b: ammo) {
-				if(alien.collisionBox.intersects(b.collisionBox)) {
+		for(Bullet b: ea.ammunition) {
+			System.out.println("game over");
+				if(b.collisionBox.intersects(alien.collisionBox)) {
 					alien.isAlive = false;
 					System.out.println("game over");
 				
 				}
 			}
+		for(EnemyAircraft ea: army) {
+			//when the player hits an enemy aircraft
+			if(ea.collisionBox.intersects(alien.collisionBox)) {
+				alien.isAlive = false;
+				
+			}
+			//when the player gets shot by anything
+			
 			//if you shoot an enemy aircraft
 			for(Lasers l : lasers) {
 				if(ea.collisionBox.intersects(l.collisionBox)) {
-					//ask about what to set it to
-					System.out.println("kill");
+					ea.isAlive = false;
 				}
 			}
 		}
@@ -135,19 +136,21 @@ public class ObjectManager extends Terrain {
 			for(int a = 0; a < army.size(); a++) {
 				if(army.get(a).isAlive() == false) {
 					army.remove(a);
+					
 					for(int x = 0; x < lasers.size(); x ++) {
 						if(lasers.get(x).isAlive() == false) {
 							lasers.remove(x);
+							
 						}
 					}
 				}
 			}
-			
+	
 		}
 		public void removeAll() {
 			army.removeAll(army);
 			lasers.removeAll(lasers);
-			ammo.removeAll(ammo);
+			ea.ammunition.removeAll(ea.ammunition);
 		}
 }
 

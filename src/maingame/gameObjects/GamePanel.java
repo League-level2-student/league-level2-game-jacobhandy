@@ -149,7 +149,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("DEFINITIVE EDITION", 240, 255);
 		g.setColor(Color.YELLOW);
 		g.drawString("Press Enter to play game", 175, 830);
-
+		manager.alien = new Player(250, 70, 50, 50);
 	}
 
 	void drawGameState(Graphics g) {
