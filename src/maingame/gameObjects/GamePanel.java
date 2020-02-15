@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -18,10 +19,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int MENU_STATE = 0;
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
+
 	int currentState = MENU_STATE;
 	Font titleFont;
-	//Player alien = new Player(250, 70, 50, 50);
-	//game is currently in impossible mode
+	// Player alien = new Player(250, 70, 50, 50);
+	// game is currently in impossible mode
 	Terrain t = new Terrain();
 	ObjectManager manager = new ObjectManager(ObjectManager.alien);
 
@@ -65,31 +67,41 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		int keyCode = e.getKeyCode();
+
+		if (currentState == MENU_STATE) {
+			if (keyCode == KeyEvent.VK_I) {
+				JOptionPane.showInputDialog(null,
+						"W, A, S, D to move, F to stop, Space to shoot, don't die. Feel free to leave any thoughts here. They will never be heard");
+			}
+		}
+		if(currentState == MENU_STATE || currentState == END_STATE) {
 		if (keyCode == KeyEvent.VK_ENTER) {
 
-			
-
 			currentState++;
-			System.out.println(currentState);
 
 			if (currentState > END_STATE) {
-				System.out.println(currentState);
+
 				currentState = MENU_STATE;
 
 			}
 
 		}
+		}
 		if (keyCode == KeyEvent.VK_W) {
-			ObjectManager.alien.moveUp();
+			// ObjectManager.alien.moveUp();
+			ObjectManager.alien.direction = 4;
 		}
 		if (keyCode == KeyEvent.VK_A) {
-			ObjectManager.alien.moveLeft();
+			ObjectManager.alien.direction = 1;
 		}
 		if (keyCode == KeyEvent.VK_S) {
-			ObjectManager.alien.moveDown();
+			ObjectManager.alien.direction = 3;
 		}
 		if (keyCode == KeyEvent.VK_D) {
-			ObjectManager.alien.moveRight();
+			ObjectManager.alien.direction = 2;
+		}
+		if (keyCode == KeyEvent.VK_F) {
+			ObjectManager.alien.direction = 0;
 		}
 	}
 
@@ -126,17 +138,21 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void updateGameState() {
-
+		manager.alien.manageDirection();
+		System.out.println(manager.score);
 		manager.update();
 		manager.checkCollision();
 		manager.purgeObjects();
-		if(ObjectManager.alien.isAlive() == false) {
+
+		if (ObjectManager.alien.isAlive() == false) {
 			currentState++;
 		}
+
 	}
 
 	void updateEndState() {
 		manager.removeAll();
+
 	}
 
 	void drawMenuState(Graphics g) {
@@ -149,6 +165,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("DEFINITIVE EDITION", 240, 255);
 		g.setColor(Color.YELLOW);
 		g.drawString("Press Enter to play game", 175, 830);
+		g.setColor(Color.MAGENTA);
+		g.drawString("Press 'I' for instructions", 170, 500);
 		manager.alien = new Player(250, 70, 50, 50);
 	}
 
@@ -164,7 +182,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		manager.draw(g);
 		t.draw(g);
 		manager.manageEnemyAircraft();
-		
+
 	}
 
 	void drawEndState(Graphics g) {
@@ -173,5 +191,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setFont(titleFont);
 		g.setColor(Color.RED);
 		g.drawString("YOU DIED", 450, 400);
+		g.setColor(Color.BLUE);
+		
+		g.setColor(Color.WHITE);
+		g.drawString("Press Enter to Restart.", 225, 700);
+		g.setColor(Color.CYAN);
+		g.drawString("Play my games", 0, 100);
+		g.drawString("instead of going to school!", 150, 200);
 	}
 }

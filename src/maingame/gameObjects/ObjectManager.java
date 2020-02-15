@@ -13,6 +13,8 @@ public class ObjectManager extends Terrain {
 	public int delay = 300;
 	public long enemyTimer = 0;
 	public int enemySpawnTime = 1000;
+	public int score;
+	public String Score = Integer.toString(score);
 	ArrayList<Lasers> lasers = new ArrayList<Lasers>();
 	ArrayList<Terrain> hills = new ArrayList<Terrain>();
 	ArrayList<EnemyAircraft> army = new ArrayList<EnemyAircraft>();
@@ -20,6 +22,7 @@ public class ObjectManager extends Terrain {
 	public ObjectManager(Player p) {
 		alien = new Player(250, 70, 50, 50);
 		addHill(t);
+		score = 0;
 		
 	}
 
@@ -81,7 +84,7 @@ public class ObjectManager extends Terrain {
 	
 	private void addEnemyAircraft(EnemyAircraft ea) {
 		// TODO Auto-generated method stub
-		if(army.size() <= 0) {
+		if(army.size() <= 1) {
 		army.add(0, ea);
 	}
 	}
@@ -104,22 +107,25 @@ public class ObjectManager extends Terrain {
 	}
 	
 	public void checkCollision() {
-		for(Bullet b: ea.ammunition) {
-			System.out.println("game over");
-				if(b.collisionBox.intersects(alien.collisionBox)) {
-					alien.isAlive = false;
-					System.out.println("game over");
-				
-				}
-			}
+		//System.out.println(ea.ammunition.size());
+		
+			
 		for(EnemyAircraft ea: army) {
 			//when the player hits an enemy aircraft
 			if(ea.collisionBox.intersects(alien.collisionBox)) {
 				alien.isAlive = false;
-				
+				score++;
 			}
-			//when the player gets shot by anything
 			
+			//when the player gets shot by anything
+			for(Bullet b: ea.ammunition) {
+				
+				if(b.collisionBox.intersects(alien.collisionBox)) {
+					alien.isAlive = false;
+					
+					
+				}
+			}
 			//if you shoot an enemy aircraft
 			for(Lasers l : lasers) {
 				if(ea.collisionBox.intersects(l.collisionBox)) {
@@ -127,11 +133,15 @@ public class ObjectManager extends Terrain {
 				}
 			}
 		}
+		}
 		
-	}
+		
+		
+	
 	
 		public void purgeObjects() {
 			
+				
 			
 			for(int a = 0; a < army.size(); a++) {
 				if(army.get(a).isAlive() == false) {
@@ -145,7 +155,7 @@ public class ObjectManager extends Terrain {
 					}
 				}
 			}
-	
+			
 		}
 		public void removeAll() {
 			army.removeAll(army);

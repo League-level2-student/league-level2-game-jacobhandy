@@ -33,7 +33,7 @@ public class EnemyAircraft extends GameObject{
 			direction++;
 			
 		}
-		else if(x > 1800){
+		else if(x > 2000){
 			direction++;
 		}
 		if(direction % 2 == 0) {
@@ -45,7 +45,7 @@ public class EnemyAircraft extends GameObject{
 		double impossible = 0.25;
 		if(x > ObjectManager.alien.x-impossible && x < ObjectManager.alien.x+50&& ObjectManager.alien.y < y) { //need to get player's x
 			
-		fire();
+		fire(new Bullet (x,y, 10, 10));
 			
 			
 		}
@@ -59,8 +59,9 @@ public class EnemyAircraft extends GameObject{
 	
 	}
 	
-	public void fire() {
-		Bullet b = new Bullet(x, y, 10, 10);
-		ammunition.add(b);
+	public void fire(Bullet b) {
+		ammunition.add(0, b);
+		
+		
 	}
 }
