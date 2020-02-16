@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -19,7 +20,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int MENU_STATE = 0;
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
-
+	public int score;
+	
 	int currentState = MENU_STATE;
 	Font titleFont;
 	// Player alien = new Player(250, 70, 50, 50);
@@ -34,7 +36,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public GamePanel() {
 		timer = new Timer(1000 / 60, this);
 		titleFont = new Font("Arial", Font.BOLD, 100);
-
+		
 	}
 
 	@Override
@@ -71,7 +73,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		if (currentState == MENU_STATE) {
 			if (keyCode == KeyEvent.VK_I) {
 				JOptionPane.showInputDialog(null,
-						"W, A, S, D to move, F to stop, Space to shoot, don't die. Feel free to leave any thoughts here. They will never be heard");
+						"W, A, S, D to move, F to stop, Space to shoot, don't die. Don't shoot fellow comrades. It has been reported that the generals are evacuating. Be sure to get them as well. It is also strongly advised that you maintain a high altitude");
 			}
 		}
 		if(currentState == MENU_STATE || currentState == END_STATE) {
@@ -135,15 +137,19 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	void updateMenuState() {
 		ObjectManager.alien.setAlive(true);
+		manager.enemyKills = 0;
+		manager.allyKills = 0;
+		manager.generalKills = 0;
+		score = 0;
 	}
 
 	void updateGameState() {
 		manager.alien.manageDirection();
-		System.out.println(manager.score);
+		
 		manager.update();
 		manager.checkCollision();
 		manager.purgeObjects();
-
+		
 		if (ObjectManager.alien.isAlive() == false) {
 			currentState++;
 		}
@@ -182,21 +188,28 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		manager.draw(g);
 		t.draw(g);
 		manager.manageEnemyAircraft();
-
+		manager.manageFriends();
+		manager.manageGenerals();
 	}
 
 	void drawEndState(Graphics g) {
+	
+		score = manager.enemyKills + manager.generalScore - manager.allyKills;
+		System.out.println(score);
 		g.setColor(Color.black);
 		g.fillRect(0, 0, Game.frameWidth, Game.frameHeight);
 		g.setFont(titleFont);
 		g.setColor(Color.RED);
-		g.drawString("YOU DIED", 450, 400);
+		g.drawString("YOU DIED", 450, 200);
 		g.setColor(Color.BLUE);
-		
+		g.drawString("You killed " + manager.enemyKills + " enemies", 150, 300);
+		g.drawString("You killed " + manager.allyKills + " allies", 150, 400);
+		g.drawString("You killed " + manager.generalKills + " commanders", 150, 500);
+		g.setColor(Color.LIGHT_GRAY);
+		g.drawString("Score: " + score, 200, 600);
 		g.setColor(Color.WHITE);
 		g.drawString("Press Enter to Restart.", 225, 700);
-		g.setColor(Color.CYAN);
-		g.drawString("Play my games", 0, 100);
-		g.drawString("instead of going to school!", 150, 200);
+		
+		
 	}
 }

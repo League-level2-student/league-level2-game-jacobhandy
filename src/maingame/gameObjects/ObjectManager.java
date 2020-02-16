@@ -1,11 +1,16 @@
 package maingame.gameObjects;
+import java.awt.Color;
 import java.awt.Graphics;
 
 
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.JLabel;
+
 import maingame.gameObjects.Enemies.EnemyAircraft;
+import maingame.gameObjects.Enemies.EnemyGeneral;
+import maingame.gameObjects.Enemies.FriendlyAlien;
 
 public class ObjectManager extends Terrain {
 	public static Player alien;
@@ -13,22 +18,39 @@ public class ObjectManager extends Terrain {
 	public int delay = 300;
 	public long enemyTimer = 0;
 	public int enemySpawnTime = 1000;
-	public int score;
-	public String Score = Integer.toString(score);
+	public long allyTimer = 0;
+	public int allySpawnTime = 1000;
+	public int generalSpawnTime = 5000;
+	public long generalTimer = 0;
+	public int enemyKills;
+	public int allyKills;
+	public int generalKills;
+	public int generalScore;
+	
+	
 	ArrayList<Lasers> lasers = new ArrayList<Lasers>();
 	ArrayList<Terrain> hills = new ArrayList<Terrain>();
+	ArrayList<FriendlyAlien> friends = new ArrayList<FriendlyAlien>();
+	ArrayList<EnemyGeneral> leadership = new ArrayList<EnemyGeneral>();
 	ArrayList<EnemyAircraft> army = new ArrayList<EnemyAircraft>();
 	//ArrayList<Bullet> ammo = new ArrayList<Bullet>();
 	public ObjectManager(Player p) {
 		alien = new Player(250, 70, 50, 50);
 		addHill(t);
-		score = 0;
-		
+		enemyKills = 0;
+		allyKills = 0;
+		generalKills = 0;
+		generalScore = 0;
 	}
-
 	public void update() {
 		
+		
 		alien.update();
+		
+		for(FriendlyAlien a : friends) {
+			a.update();
+		}
+		
 		for (Lasers p : lasers) {
 			p.update();
 		}
@@ -40,10 +62,18 @@ public class ObjectManager extends Terrain {
 			
 			
 		}
+		for(EnemyGeneral eg : leadership) {
+			eg.update();
+		}
 	}
 
 	public void draw(Graphics g) {
 		alien.draw(g);
+		
+		for(FriendlyAlien a : friends) {
+			a.draw(g);
+		}
+		
 		
 		for (Lasers p : lasers) {
 			p.draw(g);
@@ -56,6 +86,11 @@ public class ObjectManager extends Terrain {
 		for(EnemyAircraft ea : army) {
 			ea.draw(g);
 		}
+		for(EnemyGeneral eg : leadership) {
+			eg.draw(g);
+		}
+		
+		
 	}
 
 	public void addProjectile(Lasers l) {
@@ -82,13 +117,37 @@ public class ObjectManager extends Terrain {
      }
 	}
 	
+	public void manageFriends() {
+		if(System.currentTimeMillis() - allyTimer >= allySpawnTime) {
+			
+			addAllies(new FriendlyAlien(new Random().nextInt(2000), 775, 25, 25));
+			allyTimer = System.currentTimeMillis();
+		}
+	}
+	public void manageGenerals() {
+		if(System.currentTimeMillis() - generalTimer >= generalSpawnTime) {
+			addEnemyGeneral(new EnemyGeneral(2000, new Random().nextInt(750 - 450) + 450, 40, 40));
+			generalTimer = System.currentTimeMillis();
+		}
+	}
 	private void addEnemyAircraft(EnemyAircraft ea) {
 		// TODO Auto-generated method stub
 		if(army.size() <= 1) {
 		army.add(0, ea);
 	}
 	}
+		private void addEnemyGeneral(EnemyGeneral eg) {
+			if(leadership.size() <= 0) {
+				leadership.add(0, eg);
+			}
+		}
 	
+	
+	private void addAllies(FriendlyAlien a) {
+			if(friends.size() <= 10) {
+				friends.add(0, a);
+			}
+		}
 	public void manageHills() {
 
 		
@@ -106,6 +165,7 @@ public class ObjectManager extends Terrain {
 	
 	}
 	
+	
 	public void checkCollision() {
 		//System.out.println(ea.ammunition.size());
 		
@@ -114,7 +174,8 @@ public class ObjectManager extends Terrain {
 			//when the player hits an enemy aircraft
 			if(ea.collisionBox.intersects(alien.collisionBox)) {
 				alien.isAlive = false;
-				score++;
+				
+				
 			}
 			
 			//when the player gets shot by anything
@@ -130,10 +191,28 @@ public class ObjectManager extends Terrain {
 			for(Lasers l : lasers) {
 				if(ea.collisionBox.intersects(l.collisionBox)) {
 					ea.isAlive = false;
+					l.isAlive = false;
+					enemyKills++;
+				}
+				for(FriendlyAlien a : friends) {
+					if(l.collisionBox.intersects(a.collisionBox)) {
+						a.isAlive = false;
+						l.isAlive = false;
+						allyKills++;
+					}
+				}
+				for(EnemyGeneral eg : leadership) {
+					if(l.collisionBox.intersects(eg.collisionBox)) {
+					eg.isAlive = false;
+					l.isAlive = false;
+					generalKills++;
+					generalScore+=10;
+					}
 				}
 			}
 		}
-		}
+		
+	}
 		
 		
 		
@@ -153,14 +232,31 @@ public class ObjectManager extends Terrain {
 							
 						}
 					}
+				
 				}
 			}
-			
+				for(int a = 0; a < friends.size(); a++) {
+					if(friends.get(a).isAlive() == false) {
+						friends.remove(a);
+					}
+				}
+				for(int a = 0; a < leadership.size(); a++) {
+					if(leadership.get(a).isAlive == false) {
+						leadership.remove(a);
+					}
+				}
 		}
 		public void removeAll() {
 			army.removeAll(army);
 			lasers.removeAll(lasers);
 			ea.ammunition.removeAll(ea.ammunition);
+			friends.removeAll(friends);
+			leadership.removeAll(leadership);
+		}
+		
+		public void someoneScored()
+		{
+
 		}
 }
 

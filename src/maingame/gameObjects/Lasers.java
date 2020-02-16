@@ -1,4 +1,5 @@
 package maingame.gameObjects;
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class Lasers extends GameObject {
@@ -17,6 +18,7 @@ public int speed;
 		}
 	}
 	public void draw(Graphics g) {
+		g.setColor(Color.PINK);
 		g.drawRect(x, y, 5, 10);
 	}
 }

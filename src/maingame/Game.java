@@ -3,6 +3,7 @@ import java.awt.Dimension;
 import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import maingame.gameObjects.GamePanel;
 
@@ -11,9 +12,11 @@ public class Game {
 	public static int frameHeight = 1000;
 	public static JFrame mainFrame;
 	public static GamePanel window;
+	JLabel points;
 	public Game() {
 		mainFrame = new JFrame();
 		window = new GamePanel();
+		
 	}
 	  public static void createWindow() {
   	    Dimension d = new Dimension(frameWidth, frameHeight);
@@ -23,6 +26,7 @@ public class Game {
 }
 	  public  void setup() {
 		  mainFrame.add(window);
+		 
 		  mainFrame.getContentPane().setPreferredSize(new Dimension(frameWidth, frameHeight));
 		  mainFrame.pack();
 		  createWindow();

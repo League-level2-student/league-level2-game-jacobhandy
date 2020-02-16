@@ -46,7 +46,7 @@ public class EnemyAircraft extends GameObject{
 		if(x > ObjectManager.alien.x-impossible && x < ObjectManager.alien.x+50&& ObjectManager.alien.y < y) { //need to get player's x
 			
 		fire(new Bullet (x,y, 10, 10));
-			
+		 
 			
 		}
 			
@@ -54,7 +54,7 @@ public class EnemyAircraft extends GameObject{
 
 		for(Bullet b : ammunition) {
 			b.update();
-			
+		
 		}
 	
 	}
