@@ -7,7 +7,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.FileInputStream;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -20,7 +24,16 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int MENU_STATE = 0;
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
+	
 	public int score;
+	
+	public static BufferedImage alienImg;
+	public static BufferedImage enemyImg;
+	public static BufferedImage friendlyImg;
+	public static BufferedImage commImg;
+	public static BufferedImage terrainImg;
+	public static BufferedImage hillImg;
+	public static BufferedImage nightImg;
 	
 	int currentState = MENU_STATE;
 	Font titleFont;
@@ -36,6 +49,19 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public GamePanel() {
 		timer = new Timer(1000 / 60, this);
 		titleFont = new Font("Arial", Font.BOLD, 100);
+		try {
+
+			  alienImg = ImageIO.read(this.getClass().getResourceAsStream("alien.png"));
+			
+           
+
+    } catch (IOException e) {
+
+            // TODO Auto-generated catch block
+
+            e.printStackTrace();
+
+    }
 		
 	}
 
