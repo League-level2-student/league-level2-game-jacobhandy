@@ -42,8 +42,8 @@ public class Player extends GameObject {
 		x = width;
 		
 	}
-	if(x > 1350) {
-		x = 1350;
+	if(x > 1800) {
+		x = 1800;
 	}
 	if(y < 0) {
 		y = 0;

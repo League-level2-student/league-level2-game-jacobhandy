@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import maingame.gameObjects.Bullet;
 import maingame.gameObjects.GameObject;
+import maingame.gameObjects.GamePanel;
 import maingame.gameObjects.ObjectManager;
 
 public class EnemyAircraft extends GameObject{
@@ -21,7 +22,7 @@ public class EnemyAircraft extends GameObject{
 	
 	public void draw(Graphics g) {
 		g.setColor(Color.BLUE);
-		g.fillRect(x, y, 50, 50);
+		g.drawImage(GamePanel.enemyImg, x, y, 50, 50, null);
 		for(Bullet b: ammunition) {
 			 b.draw(g);
 		}

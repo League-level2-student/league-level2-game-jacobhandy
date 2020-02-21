@@ -20,7 +20,7 @@ public class Terrain{
 		g.setColor(Color.GREEN);
 		//g.fillOval(x, y, width, height);
 		//draw primary ground
-		g.fillRect(baseX, baseY, 2000, 200);
+		g.drawImage(GamePanel.terrainImg, baseX, baseY, 2000, 200, null);
 		// hills 
 		g.fillOval(hillX, 750, 300, 150);
 	}
