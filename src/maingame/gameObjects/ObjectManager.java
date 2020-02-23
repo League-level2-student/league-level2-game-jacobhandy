@@ -20,7 +20,7 @@ public class ObjectManager extends Terrain {
 	public int enemySpawnTime = 1000;
 	public long allyTimer = 0;
 	public int allySpawnTime = 1000;
-	public int generalSpawnTime = 5000;
+	public int generalSpawnTime = 10000;
 	public long generalTimer = 0;
 	public int enemyKills;
 	public int allyKills;
