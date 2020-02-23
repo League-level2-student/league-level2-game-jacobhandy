@@ -13,6 +13,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.JLabel;
@@ -37,7 +38,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public static BufferedImage terrainImg;
 	public static BufferedImage hillImg;
 	public static BufferedImage nightImg;
-	File intro;
+	String intro;
 	int currentState = MENU_STATE;
 	Font titleFont;
 	// Player alien = new Player(250, 70, 50, 50);
@@ -52,12 +53,15 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public GamePanel() {
 		timer = new Timer(1000 / 60, this);
 		titleFont = new Font("Arial", Font.BOLD, 100);
-		intro = new File("intro.wav");
+		intro = "intro.wav";
 		try {
 
 			  alienImg = ImageIO.read(this.getClass().getResourceAsStream("alien.png"));
 			  terrainImg = ImageIO.read(this.getClass().getResourceAsStream("terrain.png"));
 			  enemyImg = ImageIO.read(this.getClass().getResource("enemy.png"));
+			  hillImg = ImageIO.read(this.getClass().getResource("Hill.png"));
+			  friendlyImg = ImageIO.read(this.getClass().getResource("ally.png"));
+			  commImg = ImageIO.read(this.getClass().getResource("commander.png"));
 
     } catch (IOException e) {
 
@@ -103,8 +107,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 		if (currentState == MENU_STATE) {
 			if (keyCode == KeyEvent.VK_I) {
-				JOptionPane.showInputDialog(null,
-						"W, A, S, D to move, F to stop, Space to shoot, don't die. Don't shoot fellow comrades. It has been reported that the generals are evacuating. Be sure to get them as well. It is also strongly advised that you maintain a high altitude");
 				playSound(intro);
 			}
 		}
@@ -244,13 +246,22 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		
 		
 	}
-	public static void playSound(File Sound) {
+	public static void playSound(String Sound) {
+	
 		try {
-			Clip clip = AudioSystem.getClip();
-			clip.open(AudioSystem.getAudioInputStream(Sound));
-			clip.start();
+			File musicPath = new File(Sound);
 			
-			Thread.sleep(clip.getMicrosecondLength() / 1000);
+			if(musicPath.exists()) {
+				AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+				Clip clip = AudioSystem.getClip();
+				clip.open(audioInput);
+				clip.start();
+				
+				JOptionPane.showMessageDialog(null, "Listen");
+			}
+			else {
+				System.out.println("Can't find file");
+			}
 		} catch(Exception e) {
 			
 		}

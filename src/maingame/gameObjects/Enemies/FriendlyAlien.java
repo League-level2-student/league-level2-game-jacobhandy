@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import maingame.gameObjects.GameObject;
+import maingame.gameObjects.GamePanel;
 
 public class FriendlyAlien extends GameObject{
 public FriendlyAlien(int X, int Y, int Width, int Height) {
@@ -11,7 +12,8 @@ public FriendlyAlien(int X, int Y, int Width, int Height) {
 }
 	public void draw(Graphics g) {
 	g.setColor(Color.RED);
-	g.fillRect(x, y, width, height);
+	//g.fillRect(x, y, width, height);
+	g.drawImage(GamePanel.friendlyImg, x, y, width, height, null);
 }
 	public void update() {
 		super.update();

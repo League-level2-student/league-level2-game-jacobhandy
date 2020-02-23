@@ -22,7 +22,7 @@ public class Terrain{
 		//draw primary ground
 		g.drawImage(GamePanel.terrainImg, baseX, baseY, 2000, 200, null);
 		// hills 
-		g.fillOval(hillX, 750, 300, 150);
+		g.drawImage(GamePanel.hillImg, hillX, hillY, 300, 150, null);
 	}
 	public void update() {
 		

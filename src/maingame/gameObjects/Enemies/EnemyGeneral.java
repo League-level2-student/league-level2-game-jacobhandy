@@ -3,6 +3,8 @@ package maingame.gameObjects.Enemies;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import maingame.gameObjects.GamePanel;
+
 public class EnemyGeneral extends EnemyAircraft{
 	public int speed;
 	//This enemy will quickly go across the screen. It will move VERY fast but it doesn't fire any projectiles
@@ -13,7 +15,7 @@ public class EnemyGeneral extends EnemyAircraft{
 	}
 		public void draw(Graphics g) {
 			g.setColor(Color.white);
-			g.fillRect(x, y, width, height);
+			g.drawImage(GamePanel.commImg, x, y, width, height, null);
 		}
 		public void update() {
 			super.update();
