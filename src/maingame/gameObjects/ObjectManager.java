@@ -193,6 +193,7 @@ public class ObjectManager extends Terrain {
 					ea.isAlive = false;
 					l.isAlive = false;
 					enemyKills++;
+					ea.speed++;
 				}
 				for(FriendlyAlien a : friends) {
 					if(l.collisionBox.intersects(a.collisionBox)) {
@@ -254,9 +255,5 @@ public class ObjectManager extends Terrain {
 			leadership.removeAll(leadership);
 		}
 		
-		public void someoneScored()
-		{
-
-		}
 }
 

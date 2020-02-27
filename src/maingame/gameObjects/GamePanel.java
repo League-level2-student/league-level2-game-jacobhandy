@@ -11,11 +11,16 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -53,7 +58,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public GamePanel() {
 		timer = new Timer(1000 / 60, this);
 		titleFont = new Font("Arial", Font.BOLD, 100);
-		intro = "intro.wav";
+		intro = "oof.mp3";
 		try {
 
 			  alienImg = ImageIO.read(this.getClass().getResourceAsStream("alien.png"));
@@ -175,6 +180,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		manager.allyKills = 0;
 		manager.generalKills = 0;
 		score = 0;
+		
 	}
 
 	void updateGameState() {
@@ -247,21 +253,29 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		
 	}
 	public static void playSound(String Sound) {
-	
+		File musicPath = new File(Sound);
+		
+		
+		
 		try {
-			File musicPath = new File(Sound);
+			
 			
 			if(musicPath.exists()) {
-				AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
 				Clip clip = AudioSystem.getClip();
+			
+				AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+			
 				clip.open(audioInput);
-				clip.start();
 				
-				JOptionPane.showMessageDialog(null, "Listen");
+				clip.start();
+				clip.drain();
+				System.out.println(clip.isOpen());
+				System.out.println(clip.isOpen());
+				
 			}
 			else {
 				System.out.println("Can't find file");
-			}
+		}
 		} catch(Exception e) {
 			
 		}
