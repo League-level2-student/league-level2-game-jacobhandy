@@ -43,6 +43,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public static BufferedImage terrainImg;
 	public static BufferedImage hillImg;
 	public static BufferedImage nightImg;
+	public static BufferedImage bulletImg;
+	public static BufferedImage treeImg;
 	String intro;
 	int currentState = MENU_STATE;
 	Font titleFont;
@@ -67,6 +69,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			  hillImg = ImageIO.read(this.getClass().getResource("Hill.png"));
 			  friendlyImg = ImageIO.read(this.getClass().getResource("ally.png"));
 			  commImg = ImageIO.read(this.getClass().getResource("commander.png"));
+			  bulletImg = ImageIO.read(this.getClass().getResource("bullet.png"));
+			  treeImg = ImageIO.read(this.getClass().getResource("tree.png"));
 
     } catch (IOException e) {
 
@@ -113,6 +117,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		if (currentState == MENU_STATE) {
 			if (keyCode == KeyEvent.VK_I) {
 				playSound(intro);
+				JOptionPane.showMessageDialog(null, "WASD to move, F to stop, Space to shoot. Don't shoot friendlies but shoot enemy fighters.");
 			}
 		}
 		if(currentState == MENU_STATE || currentState == END_STATE) {
@@ -223,13 +228,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setFont(titleFont);
 		// create alien
 		manager.manageHills();
-
+		manager.manageStars();
 		ObjectManager.alien.draw(g);
 		manager.draw(g);
 		t.draw(g);
 		manager.manageEnemyAircraft();
 		manager.manageFriends();
 		manager.manageGenerals();
+		manager.manageTrees();
 	}
 
 	void drawEndState(Graphics g) {

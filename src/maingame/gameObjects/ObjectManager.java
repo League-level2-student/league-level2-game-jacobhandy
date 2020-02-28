@@ -26,13 +26,17 @@ public class ObjectManager extends Terrain {
 	public int allyKills;
 	public int generalKills;
 	public int generalScore;
-	
-	
+	public long starTimer = 0;
+	public int starSpawnTime = 1000;
+	public int treeSpawnTime = 2000;
+	public long treeTimer = 0;
 	ArrayList<Lasers> lasers = new ArrayList<Lasers>();
 	ArrayList<Terrain> hills = new ArrayList<Terrain>();
 	ArrayList<FriendlyAlien> friends = new ArrayList<FriendlyAlien>();
 	ArrayList<EnemyGeneral> leadership = new ArrayList<EnemyGeneral>();
 	ArrayList<EnemyAircraft> army = new ArrayList<EnemyAircraft>();
+	ArrayList<Stars> galaxy = new ArrayList<Stars>();
+	ArrayList<tree> forest = new ArrayList<tree>();
 	//ArrayList<Bullet> ammo = new ArrayList<Bullet>();
 	public ObjectManager(Player p) {
 		alien = new Player(250, 70, 50, 50);
@@ -46,7 +50,12 @@ public class ObjectManager extends Terrain {
 		
 		
 		alien.update();
-		
+		for(tree z : forest) {
+			z.update();
+		}
+		for(Stars s : galaxy) {
+			s.update();
+		}
 		for(FriendlyAlien a : friends) {
 			a.update();
 		}
@@ -69,7 +78,12 @@ public class ObjectManager extends Terrain {
 
 	public void draw(Graphics g) {
 		alien.draw(g);
-		
+		for(tree z : forest) {
+			z.draw(g);
+		}
+		for(Stars s : galaxy) {
+			s.draw(g);
+		}
 		for(FriendlyAlien a : friends) {
 			a.draw(g);
 		}
@@ -100,14 +114,26 @@ public class ObjectManager extends Terrain {
 	public void addHill(Terrain p) {
 		hills.add(p);
 	}
-
+	public void addStars(Stars s) {
+		if(galaxy.size() <= 100) {
+		galaxy.add(s);
+	}
+	}
+	public void addTree(tree z) {
+		forest.add(z);
+	}
 	int a = 0;
 	Terrain t = new Terrain();
 
 	//manage enemy aircraft in game panel with the timer class
 	
 	EnemyAircraft ea = new EnemyAircraft(new Random().nextInt(2000), 1500, 50, 50); //Add random values for position later
-	
+	public void manageTrees() {
+		if(System.currentTimeMillis() - treeTimer >= treeSpawnTime) {
+			addTree(new tree(2000, 750, 25, 50));
+			treeTimer = System.currentTimeMillis();
+		}
+	}
 	public void manageEnemyAircraft() {
 		//System.out.println(army.size());
 		 if(System.currentTimeMillis() - enemyTimer >= enemySpawnTime){
@@ -116,7 +142,11 @@ public class ObjectManager extends Terrain {
              enemyTimer = System.currentTimeMillis();
      }
 	}
-	
+	public void manageStars() {
+		if(System.currentTimeMillis() - starTimer >= starSpawnTime) {
+			addStars(new Stars(new Random().nextInt(2000), new Random().nextInt(1000), 1, 1));
+		}
+	}
 	public void manageFriends() {
 		if(System.currentTimeMillis() - allyTimer >= allySpawnTime) {
 			
@@ -221,7 +251,12 @@ public class ObjectManager extends Terrain {
 	
 		public void purgeObjects() {
 			
-				
+			for(int a = 0; a < galaxy.size(); a++) {
+				if(galaxy.get(a).isAlive() == false)
+				{
+					galaxy.remove(a);
+				}
+				}
 			
 			for(int a = 0; a < army.size(); a++) {
 				if(army.get(a).isAlive() == false) {
@@ -253,6 +288,7 @@ public class ObjectManager extends Terrain {
 			ea.ammunition.removeAll(ea.ammunition);
 			friends.removeAll(friends);
 			leadership.removeAll(leadership);
+			galaxy.removeAll(galaxy);
 		}
 		
 }

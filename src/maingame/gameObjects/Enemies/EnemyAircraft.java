@@ -16,7 +16,7 @@ public class EnemyAircraft extends GameObject{
 	public EnemyAircraft(int X, int Y, int Width, int Height) {
 		super(X, Y, Width, Height);
 		// TODO Auto-generated constructor stub
-		speed = 15;
+		speed = 20;
 		direction = 0;
 	}
 	
@@ -30,7 +30,7 @@ public class EnemyAircraft extends GameObject{
 	public void update() {
 		super.update();
 		collisionBox.setLocation(x,y);
-		if(x < 10) { 
+		if(x < 0) { 
 			direction++;
 			
 		}
