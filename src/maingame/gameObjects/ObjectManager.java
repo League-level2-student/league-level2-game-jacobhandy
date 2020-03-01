@@ -1,5 +1,4 @@
 package maingame.gameObjects;
-import java.awt.Color;
 import java.awt.Graphics;
 
 
@@ -115,7 +114,7 @@ public class ObjectManager extends Terrain {
 		hills.add(p);
 	}
 	public void addStars(Stars s) {
-		if(galaxy.size() <= 100) {
+		if(galaxy.size() <= 300) {
 		galaxy.add(s);
 	}
 	}

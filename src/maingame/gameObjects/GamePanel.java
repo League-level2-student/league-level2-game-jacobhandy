@@ -9,25 +9,18 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 import javax.imageio.ImageIO;
-import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.DataLine;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import maingame.Game;
 
+@SuppressWarnings("serial")
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Timer timer;
 	final int MENU_STATE = 0;
@@ -188,6 +181,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		
 	}
 
+	@SuppressWarnings("static-access")
 	void updateGameState() {
 		manager.alien.manageDirection();
 		
@@ -206,6 +200,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	}
 
+	@SuppressWarnings("static-access")
 	void drawMenuState(Graphics g) {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, Game.frameWidth, Game.frameHeight);
@@ -219,7 +214,17 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setColor(Color.MAGENTA);
 		g.drawString("Press 'I' for instructions", 170, 500);
 		manager.alien = new Player(250, 70, 50, 50);
+		g.setColor(Color.WHITE);
+		g.drawImage(alienImg, 750, 550, 50, 50, null);
+		g.drawString("You", 730, 670);
+		g.drawString("Your Enemies", 0, 670);
+		g.drawImage(enemyImg, 100, 550, 50, 50, null);
+		g.drawImage(commImg, 200, 550, 50, 50, null);
+		g.drawString("Allies", 1100, 670);
+		g.drawImage(friendlyImg, 1200, 550, 50, 50, null);
 	}
+	
+	
 
 	void drawGameState(Graphics g) {
 		// set up screen
