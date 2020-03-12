@@ -8,7 +8,7 @@ public class Player extends GameObject {
 	public int direction = 0;
 	public Player(int X, int Y, int Width, int Height) {
 		super(X, Y, Width, Height);
-		speed = 10;
+		speed = 20;
 		
 	}
 

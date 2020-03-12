@@ -16,7 +16,7 @@ public class EnemyAircraft extends GameObject{
 	public EnemyAircraft(int X, int Y, int Width, int Height) {
 		super(X, Y, Width, Height);
 		// TODO Auto-generated constructor stub
-		speed = 20;
+		speed = 25;
 		direction = 0;
 	}
 	

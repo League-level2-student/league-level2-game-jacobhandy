@@ -11,7 +11,7 @@ public class EnemyGeneral extends EnemyAircraft{
 	public EnemyGeneral(int X, int Y, int Width, int Height) {
 		super(X, Y, Width, Height);
 		// TODO Auto-generated constructor stub
-		speed = 35;
+		speed = 50;
 	}
 		public void draw(Graphics g) {
 			g.setColor(Color.white);

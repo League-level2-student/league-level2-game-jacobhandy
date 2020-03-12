@@ -28,7 +28,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int END_STATE = 2;
 	
 	public int score;
-	
+	public int firingTime = 0;
 	public static BufferedImage alienImg;
 	public static BufferedImage enemyImg;
 	public static BufferedImage friendlyImg;
@@ -92,7 +92,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			updateEndState();
 
 		}
-
+ 
 		repaint();
 	}
 
@@ -142,15 +142,19 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		if (keyCode == KeyEvent.VK_F) {
 			ObjectManager.alien.direction = 0;
 		}
+		if (keyCode == KeyEvent.VK_SPACE) {
+			if(firingTime <= 0) {
+			manager.addProjectile(new Lasers(ObjectManager.alien.x + 20, ObjectManager.alien.y, 10, 10));
+			firingTime = 30;
+			}
+		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		int keyCode = e.getKeyCode();
-		if (keyCode == KeyEvent.VK_SPACE) {
-			manager.addProjectile(new Lasers(ObjectManager.alien.x + 20, ObjectManager.alien.y, 10, 10));
-		}
+		//int keyCode = e.getKeyCode();
+		
 	}
 
 	@Override
@@ -183,8 +187,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	@SuppressWarnings("static-access")
 	void updateGameState() {
+		firingTime--;
 		manager.alien.manageDirection();
-		
 		manager.update();
 		manager.checkCollision();
 		manager.purgeObjects();
@@ -222,6 +226,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.drawImage(commImg, 200, 550, 50, 50, null);
 		g.drawString("Allies", 1100, 670);
 		g.drawImage(friendlyImg, 1200, 550, 50, 50, null);
+		manager.enemyCap = 0;
 	}
 	
 	
@@ -232,7 +237,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.fillRect(0, 0, Game.frameWidth, Game.frameHeight);
 		g.setFont(titleFont);
 		// create alien
-		manager.manageHills();
+		//manager.manageHills();
 		manager.manageStars();
 		ObjectManager.alien.draw(g);
 		manager.draw(g);
@@ -251,6 +256,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.fillRect(0, 0, Game.frameWidth, Game.frameHeight);
 		g.setFont(titleFont);
 		g.setColor(Color.RED);
+	
 		g.drawString("YOU DIED", 450, 200);
 		g.setColor(Color.BLUE);
 		g.drawString("You killed " + manager.enemyKills + " enemies", 150, 300);

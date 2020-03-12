@@ -10,6 +10,7 @@ public class GameObject {
      public int width;
      public int height;
      public boolean isAlive;
+     public int spread = 0;
      public Rectangle collisionBox;
      
      public GameObject(int X, int Y, int Width, int Height) {

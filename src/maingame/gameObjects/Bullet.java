@@ -17,6 +17,7 @@ public class Bullet extends GameObject{
 		if(y < -10) {
 			isAlive = false;
 		}
+		
 	}
 	public void draw(Graphics g) {
 	    g.setColor(Color.WHITE);

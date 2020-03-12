@@ -27,8 +27,11 @@ public class ObjectManager extends Terrain {
 	public int generalScore;
 	public long starTimer = 0;
 	public int starSpawnTime = 1000;
-	public int treeSpawnTime = 2000;
+	public int treeSpawnTime = 200;
 	public long treeTimer = 0;
+	public static int spread = 2;
+	public int enemyCap = 0;
+	
 	ArrayList<Lasers> lasers = new ArrayList<Lasers>();
 	ArrayList<Terrain> hills = new ArrayList<Terrain>();
 	ArrayList<FriendlyAlien> friends = new ArrayList<FriendlyAlien>();
@@ -108,6 +111,7 @@ public class ObjectManager extends Terrain {
 
 	public void addProjectile(Lasers l) {
 		lasers.add(l);
+		spread++;
 	}
 
 	public void addHill(Terrain p) {
@@ -161,7 +165,7 @@ public class ObjectManager extends Terrain {
 	}
 	private void addEnemyAircraft(EnemyAircraft ea) {
 		// TODO Auto-generated method stub
-		if(army.size() <= 1) {
+		if(army.size() <= enemyCap) {
 		army.add(0, ea);
 	}
 	}
@@ -223,6 +227,9 @@ public class ObjectManager extends Terrain {
 					l.isAlive = false;
 					enemyKills++;
 					ea.speed++;
+					//if(enemyKills % 5 == 0) {
+						enemyCap++;
+					//}
 				}
 				for(FriendlyAlien a : friends) {
 					if(l.collisionBox.intersects(a.collisionBox)) {

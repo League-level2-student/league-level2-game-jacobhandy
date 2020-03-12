@@ -22,11 +22,11 @@ public class Terrain{
 		//draw primary ground
 		g.drawImage(GamePanel.terrainImg, baseX, baseY, 2000, 200, null);
 		// hills 
-		g.drawImage(GamePanel.hillImg, hillX, hillY, 300, 150, null);
+		//g.drawImage(GamePanel.hillImg, hillX, hillY, 300, 150, null);
 	}
 	public void update() {
 		
-		hillX -= speed;
+		//hillX -= speed;
 		
 		
 		
