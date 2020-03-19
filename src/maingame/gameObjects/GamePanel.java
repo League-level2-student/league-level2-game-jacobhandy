@@ -110,7 +110,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		if (currentState == MENU_STATE) {
 			if (keyCode == KeyEvent.VK_I) {
 				playSound(intro);
-				JOptionPane.showMessageDialog(null, "WASD to move, F to stop, Space to shoot. Don't shoot friendlies but shoot enemy fighters.");
+				JOptionPane.showMessageDialog(null, "WASD to move, F to stop. Eliminate as many eneimes as possible.");
 			}
 		}
 		if(currentState == MENU_STATE || currentState == END_STATE) {
@@ -246,6 +246,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		manager.manageFriends();
 		manager.manageGenerals();
 		manager.manageTrees();
+		g.setColor(Color.YELLOW);
+		
 	}
 
 	void drawEndState(Graphics g) {

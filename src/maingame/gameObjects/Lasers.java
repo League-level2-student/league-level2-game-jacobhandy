@@ -18,7 +18,7 @@ public int speed;
 		}
 	}
 	public void draw(Graphics g) {
-		g.setColor(Color.GREEN);
+		g.setColor(Color.WHITE);
 		g.drawRect(x, y, 5, 10);
 	}
 }
